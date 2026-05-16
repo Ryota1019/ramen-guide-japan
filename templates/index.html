@@ -1,0 +1,88 @@
+{#
+  index.html — Home page
+  extends "base.html" means: use base.html as the layout.
+  We only need to fill in the block sections defined in base.html.
+#}
+{% extends "base.html" %}
+
+{% block title %}Home{% endblock %}
+
+{% block content %}
+
+  <!-- ── HERO SECTION ────────────────────────────────────────────── -->
+  <section class="hero">
+    <h1>Find Your Perfect Ramen in Japan 🍜</h1>
+    <p class="hero-subtitle">
+      A guide for tourists — discover the best ramen restaurants in Tokyo and Osaka,
+      with English descriptions, prices, and maps.
+    </p>
+    <!-- City selection buttons -->
+    <div class="hero-buttons">
+      <a href="{{ url_for('tokyo') }}" class="btn btn-primary">Tokyo Ramen</a>
+      <a href="{{ url_for('osaka') }}" class="btn btn-secondary">Osaka Ramen</a>
+    </div>
+  </section>
+
+  <!-- ── QUICK INTRO CARDS ─────────────────────────────────────── -->
+  <section class="section">
+    <h2 class="section-title">Explore by City</h2>
+    <div class="city-cards">
+
+      <a href="{{ url_for('tokyo') }}" class="city-card">
+        <div class="city-card-emoji">🗼</div>
+        <h3>Tokyo</h3>
+        <p>From rich tonkotsu in Golden Gai to light yuzu shio in Harajuku — Tokyo has it all.</p>
+      </a>
+
+      <a href="{{ url_for('osaka') }}" class="city-card">
+        <div class="city-card-emoji">🏯</div>
+        <h3>Osaka</h3>
+        <p>Osaka's food culture is legendary. Late-night bowls in Dotonbori, bold miso in Namba.</p>
+      </a>
+
+    </div>
+  </section>
+
+  <!-- ── FEATURED RESTAURANTS ──────────────────────────────────── -->
+  <section class="section">
+    <h2 class="section-title">Featured Restaurants</h2>
+
+    <!--
+      This is a Jinja2 for loop.
+      "featured" is the list we passed from app.py.
+      For each restaurant dict, we render one card.
+    -->
+    <div class="restaurant-grid">
+      {% for r in featured %}
+        <a href="{{ url_for('detail', restaurant_id=r.id) }}" class="restaurant-card">
+          <div class="card-header">
+            <span class="ramen-type-badge">{{ r.ramen_type }}</span>
+          </div>
+          <h3 class="card-name">{{ r.name }}</h3>
+          <p class="card-area">📍 {{ r.area }}, {{ r.city | capitalize }}</p>
+          <p class="card-desc">{{ r.description[:120] }}…</p>
+          <p class="card-price">{{ r.price_range }}</p>
+          <!-- Tags -->
+          <div class="tag-list">
+            {% for tag in r.tags %}
+              <span class="tag">{{ tag }}</span>
+            {% endfor %}
+          </div>
+        </a>
+      {% endfor %}
+    </div>
+  </section>
+
+  <!-- ── QUICK TIPS ─────────────────────────────────────────────── -->
+  <section class="section tips-section">
+    <h2 class="section-title">Tips for Tourists</h2>
+    <ul class="tips-list">
+      <li>🎟️ Many ramen shops use a <strong>ticket vending machine</strong> at the entrance — buy your ticket before sitting down.</li>
+      <li>💴 Some smaller restaurants are <strong>cash only</strong>. Keep ¥1,000–¥2,000 notes handy.</li>
+      <li>🚫 It is completely normal to <strong>slurp your noodles</strong> loudly — it shows you enjoy the food!</li>
+      <li>🧴 <strong>Toppings</strong> like extra chashu (pork), soft-boiled egg (ajitsuke tamago), or extra noodles (kaedama) are usually cheap add-ons.</li>
+      <li>⏰ Popular shops often have <strong>queues at lunch</strong>. Arrive early or go at an off-peak time.</li>
+    </ul>
+  </section>
+
+{% endblock %}

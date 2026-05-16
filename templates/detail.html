@@ -1,0 +1,92 @@
+<!--
+  detail.html — Individual restaurant detail page.
+  app.py passes one variable: restaurant (a single dict).
+  Access dict values with dot notation: restaurant.name, restaurant.area, etc.
+-->
+{% extends "base.html" %}
+
+{% block title %}{{ restaurant.name }}{% endblock %}
+
+{% block content %}
+
+  <!-- Breadcrumb navigation: Home → City → Restaurant -->
+  <nav class="breadcrumb">
+    <a href="{{ url_for('index') }}">Home</a>
+    <span>›</span>
+    {% if restaurant.city == "tokyo" %}
+      <a href="{{ url_for('tokyo') }}">Tokyo</a>
+    {% else %}
+      <a href="{{ url_for('osaka') }}">Osaka</a>
+    {% endif %}
+    <span>›</span>
+    <span>{{ restaurant.name }}</span>
+  </nav>
+
+  <!-- ── RESTAURANT DETAIL ──────────────────────────────────────── -->
+  <article class="detail-card">
+
+    <div class="detail-header">
+      <span class="ramen-type-badge ramen-type-badge--large">{{ restaurant.ramen_type }}</span>
+      <h1 class="detail-name">{{ restaurant.name }}</h1>
+      <p class="detail-area">📍 {{ restaurant.area }}, {{ restaurant.city | capitalize }}</p>
+    </div>
+
+    <!-- Tags -->
+    <div class="tag-list tag-list--large">
+      {% for tag in restaurant.tags %}
+        <span class="tag">{{ tag }}</span>
+      {% endfor %}
+    </div>
+
+    <!-- Long description -->
+    <p class="detail-description">{{ restaurant.description }}</p>
+
+    <!-- Info grid: price, hours, address -->
+    <div class="info-grid">
+
+      <div class="info-item">
+        <span class="info-label">💴 Price Range</span>
+        <span class="info-value">{{ restaurant.price_range }}</span>
+      </div>
+
+      <div class="info-item">
+        <span class="info-label">🕐 Hours</span>
+        <span class="info-value">{{ restaurant.hours }}</span>
+      </div>
+
+      <div class="info-item">
+        <span class="info-label">🏠 Address</span>
+        <span class="info-value">{{ restaurant.address }}</span>
+      </div>
+
+    </div>
+
+    <!-- Google Maps link -->
+    <!--
+      target="_blank" opens the link in a new tab.
+      rel="noopener noreferrer" is a security best practice for external links.
+    -->
+    <a href="{{ restaurant.google_maps_url }}"
+       target="_blank"
+       rel="noopener noreferrer"
+       class="btn btn-primary btn-maps">
+      📍 Open in Google Maps
+    </a>
+
+  </article>
+
+  <!-- ── AD PLACEHOLDER ────────────────────────────────────────── -->
+  <div class="ad-inline">
+    <span>Advertisement</span>
+  </div>
+
+  <!-- ── BACK BUTTON ────────────────────────────────────────────── -->
+  <div class="back-link">
+    {% if restaurant.city == "tokyo" %}
+      <a href="{{ url_for('tokyo') }}">← Back to Tokyo list</a>
+    {% else %}
+      <a href="{{ url_for('osaka') }}">← Back to Osaka list</a>
+    {% endif %}
+  </div>
+
+{% endblock %}

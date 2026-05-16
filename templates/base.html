@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <!--
+    viewport meta tag: essential for mobile-first design.
+    It tells the browser to use the device's actual width, not a zoomed-out desktop view.
+  -->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  {# Child templates can override the title block. This is the default title if no child sets one. #}
+  <title>{% block title %}Ramen in Japan{% endblock %} | Ramen Guide Japan</title>
+
+  <!-- Link to our CSS file. url_for() generates the correct path automatically. -->
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}" />
+</head>
+<body>
+
+  <!-- ── HEADER / NAVIGATION ─────────────────────────────────────── -->
+  <header class="site-header">
+    <div class="container header-inner">
+      <!-- Site logo / name — links back to home -->
+      <a href="{{ url_for('index') }}" class="site-logo">🍜 Ramen Guide Japan</a>
+
+      <!-- Navigation links -->
+      <nav class="site-nav">
+        <a href="{{ url_for('index') }}">Home</a>
+        <a href="{{ url_for('tokyo') }}">Tokyo</a>
+        <a href="{{ url_for('osaka') }}">Osaka</a>
+        <a href="{{ url_for('about') }}">About</a>
+      </nav>
+    </div>
+  </header>
+
+  <!-- ── AD PLACEHOLDER (top banner) ──────────────────────────────── -->
+  <!--
+    This is a placeholder for a future advertisement (e.g. Google AdSense).
+    For now it just shows a label so you know where an ad would appear.
+  -->
+  <div class="ad-banner container">
+    <span>Advertisement</span>
+  </div>
+
+  <!-- ── MAIN CONTENT ──────────────────────────────────────────────── -->
+  {# The content block is the main slot. Each child template fills this with its own HTML. #}
+  <main class="container">
+    {% block content %}{% endblock %}
+  </main>
+
+  <!-- ── AD PLACEHOLDER (bottom banner) ───────────────────────────── -->
+  <div class="ad-banner container">
+    <span>Advertisement</span>
+  </div>
+
+  <!-- ── FOOTER ────────────────────────────────────────────────────── -->
+  <footer class="site-footer">
+    <div class="container">
+      <p>© 2025 Ramen Guide Japan &mdash; Helping tourists find the best bowl in Japan.</p>
+      <nav class="footer-nav">
+        <a href="{{ url_for('index') }}">Home</a>
+        <a href="{{ url_for('tokyo') }}">Tokyo</a>
+        <a href="{{ url_for('osaka') }}">Osaka</a>
+        <a href="{{ url_for('about') }}">About</a>
+      </nav>
+    </div>
+  </footer>
+
+</body>
+</html>

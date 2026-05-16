@@ -1,0 +1,596 @@
+/* ============================================================
+   style.css — Mobile-first stylesheet for Ramen Guide Japan
+   Strategy: write styles for small screens first,
+   then use @media queries to adjust for larger screens.
+   ============================================================ */
+
+/* ── CSS RESET & BASE ───────────────────────────────────────── */
+/* Remove default margin/padding and use border-box sizing */
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+/* Root variables — change these to retheme the whole site */
+:root {
+  --color-primary:   #c0392b;   /* deep red — ramen/Japan theme */
+  --color-secondary: #e67e22;   /* warm orange */
+  --color-bg:        #fafafa;
+  --color-surface:   #ffffff;
+  --color-text:      #2c2c2c;
+  --color-muted:     #6c6c6c;
+  --color-border:    #e0e0e0;
+  --color-tag-bg:    #f0f0f0;
+  --color-ad-bg:     #f5f0e8;
+
+  --font-base: 'Segoe UI', Arial, sans-serif;
+  --radius:    8px;
+  --shadow:    0 2px 8px rgba(0,0,0,0.08);
+}
+
+body {
+  font-family: var(--font-base);
+  background-color: var(--color-bg);
+  color: var(--color-text);
+  line-height: 1.6;
+  font-size: 16px;
+}
+
+a {
+  color: var(--color-primary);
+  text-decoration: none;
+}
+a:hover {
+  text-decoration: underline;
+}
+
+img {
+  max-width: 100%;
+  display: block;
+}
+
+/* ── LAYOUT CONTAINER ────────────────────────────────────────── */
+/* Centers content and limits width on large screens */
+.container {
+  width: 100%;
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 0 16px;
+}
+
+/* ── HEADER ──────────────────────────────────────────────────── */
+.site-header {
+  background-color: var(--color-primary);
+  color: white;
+  padding: 14px 0;
+  position: sticky;   /* stays at the top when you scroll */
+  top: 0;
+  z-index: 100;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.2);
+}
+
+.header-inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;    /* stack on very small screens */
+  gap: 8px;
+}
+
+.site-logo {
+  color: white;
+  font-size: 1.25rem;
+  font-weight: 700;
+  text-decoration: none;
+}
+.site-logo:hover {
+  text-decoration: none;
+  opacity: 0.9;
+}
+
+.site-nav {
+  display: flex;
+  gap: 16px;
+}
+.site-nav a {
+  color: rgba(255,255,255,0.9);
+  font-size: 0.95rem;
+  text-decoration: none;
+}
+.site-nav a:hover {
+  color: white;
+  text-decoration: underline;
+}
+
+/* ── AD BANNER ───────────────────────────────────────────────── */
+/* Placeholder styling for future ads */
+.ad-banner {
+  background-color: var(--color-ad-bg);
+  border: 1px dashed #c8b89a;
+  border-radius: var(--radius);
+  text-align: center;
+  padding: 14px;
+  margin: 16px auto;
+  font-size: 0.8rem;
+  color: var(--color-muted);
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+}
+
+.ad-inline {
+  background-color: var(--color-ad-bg);
+  border: 1px dashed #c8b89a;
+  border-radius: var(--radius);
+  text-align: center;
+  padding: 20px;
+  margin: 24px 0;
+  font-size: 0.8rem;
+  color: var(--color-muted);
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+}
+
+/* ── MAIN CONTENT ────────────────────────────────────────────── */
+main {
+  padding: 24px 16px;
+}
+
+/* ── SECTION WRAPPER ─────────────────────────────────────────── */
+.section {
+  margin-bottom: 48px;
+}
+
+.section-title {
+  font-size: 1.5rem;
+  margin-bottom: 20px;
+  color: var(--color-text);
+  border-left: 4px solid var(--color-primary);
+  padding-left: 12px;
+}
+
+/* ── HERO SECTION ────────────────────────────────────────────── */
+.hero {
+  text-align: center;
+  padding: 40px 16px;
+  background: linear-gradient(135deg, #c0392b 0%, #e67e22 100%);
+  color: white;
+  border-radius: var(--radius);
+  margin-bottom: 40px;
+}
+
+.hero h1 {
+  font-size: 1.8rem;
+  margin-bottom: 12px;
+}
+
+.hero-subtitle {
+  font-size: 1rem;
+  opacity: 0.92;
+  max-width: 600px;
+  margin: 0 auto 24px;
+}
+
+.hero-buttons {
+  display: flex;
+  gap: 12px;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+/* ── BUTTONS ─────────────────────────────────────────────────── */
+.btn {
+  display: inline-block;
+  padding: 12px 24px;
+  border-radius: var(--radius);
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  text-decoration: none;
+  transition: opacity 0.2s;
+}
+.btn:hover {
+  opacity: 0.88;
+  text-decoration: none;
+}
+
+.btn-primary {
+  background-color: white;
+  color: var(--color-primary);
+}
+
+.btn-secondary {
+  background-color: transparent;
+  border: 2px solid white;
+  color: white;
+}
+
+.btn-maps {
+  background-color: var(--color-primary);
+  color: white;
+  margin-top: 20px;
+  display: inline-block;
+}
+
+/* ── CITY CARDS (home page) ──────────────────────────────────── */
+.city-cards {
+  display: grid;
+  grid-template-columns: 1fr;   /* 1 column on mobile */
+  gap: 16px;
+}
+
+.city-card {
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius);
+  padding: 24px;
+  text-align: center;
+  color: var(--color-text);
+  text-decoration: none;
+  box-shadow: var(--shadow);
+  transition: transform 0.15s, box-shadow 0.15s;
+  display: block;
+}
+.city-card:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 6px 16px rgba(0,0,0,0.12);
+  text-decoration: none;
+}
+
+.city-card-emoji {
+  font-size: 2.5rem;
+  margin-bottom: 10px;
+}
+.city-card h3 {
+  font-size: 1.3rem;
+  margin-bottom: 8px;
+  color: var(--color-primary);
+}
+.city-card p {
+  font-size: 0.9rem;
+  color: var(--color-muted);
+}
+
+/* ── RESTAURANT GRID & CARDS ─────────────────────────────────── */
+.restaurant-grid {
+  display: grid;
+  grid-template-columns: 1fr;   /* 1 column on mobile */
+  gap: 16px;
+}
+
+.restaurant-card {
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius);
+  padding: 20px;
+  box-shadow: var(--shadow);
+  display: block;           /* makes the whole card a link */
+  color: var(--color-text);
+  text-decoration: none;
+  transition: transform 0.15s, box-shadow 0.15s;
+}
+.restaurant-card:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 6px 16px rgba(0,0,0,0.12);
+  text-decoration: none;
+}
+
+.card-header {
+  margin-bottom: 8px;
+}
+
+/* Small colored badge for the ramen type */
+.ramen-type-badge {
+  display: inline-block;
+  background-color: var(--color-primary);
+  color: white;
+  font-size: 0.75rem;
+  font-weight: 600;
+  padding: 3px 10px;
+  border-radius: 20px;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+
+.ramen-type-badge--large {
+  font-size: 0.85rem;
+  padding: 5px 14px;
+}
+
+.card-name {
+  font-size: 1.15rem;
+  margin-bottom: 4px;
+  color: var(--color-text);
+}
+
+.card-area {
+  font-size: 0.85rem;
+  color: var(--color-muted);
+  margin-bottom: 8px;
+}
+
+.card-desc {
+  font-size: 0.9rem;
+  color: var(--color-muted);
+  margin-bottom: 10px;
+}
+
+.card-price {
+  font-weight: 600;
+  color: var(--color-secondary);
+  margin-bottom: 10px;
+  font-size: 0.95rem;
+}
+
+.card-link {
+  display: block;
+  margin-top: 12px;
+  font-size: 0.85rem;
+  color: var(--color-primary);
+  font-weight: 600;
+}
+
+/* ── TAGS ────────────────────────────────────────────────────── */
+.tag-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+
+.tag-list--large {
+  margin-bottom: 20px;
+}
+
+.tag {
+  background-color: var(--color-tag-bg);
+  color: var(--color-muted);
+  font-size: 0.78rem;
+  padding: 3px 10px;
+  border-radius: 20px;
+  border: 1px solid var(--color-border);
+}
+
+/* ── PAGE HEADER (city / about pages) ───────────────────────── */
+.page-header {
+  margin-bottom: 28px;
+  padding-bottom: 16px;
+  border-bottom: 2px solid var(--color-border);
+}
+
+.page-header h1 {
+  font-size: 1.8rem;
+  margin-bottom: 4px;
+}
+.page-header p {
+  color: var(--color-muted);
+}
+
+/* ── DETAIL PAGE ─────────────────────────────────────────────── */
+.breadcrumb {
+  font-size: 0.85rem;
+  color: var(--color-muted);
+  margin-bottom: 20px;
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+.breadcrumb a {
+  color: var(--color-muted);
+}
+.breadcrumb a:hover {
+  color: var(--color-primary);
+}
+
+.detail-card {
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius);
+  padding: 24px;
+  box-shadow: var(--shadow);
+  margin-bottom: 24px;
+}
+
+.detail-header {
+  margin-bottom: 16px;
+}
+
+.detail-name {
+  font-size: 1.8rem;
+  margin: 10px 0 4px;
+}
+
+.detail-area {
+  color: var(--color-muted);
+  font-size: 0.95rem;
+  margin-bottom: 12px;
+}
+
+.detail-description {
+  font-size: 1rem;
+  line-height: 1.75;
+  margin: 20px 0;
+  color: var(--color-text);
+}
+
+/* Info grid: price, hours, address */
+.info-grid {
+  display: grid;
+  grid-template-columns: 1fr;   /* stacked on mobile */
+  gap: 12px;
+  margin: 20px 0;
+  background-color: var(--color-bg);
+  border-radius: var(--radius);
+  padding: 16px;
+  border: 1px solid var(--color-border);
+}
+
+.info-item {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.info-label {
+  font-size: 0.8rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--color-muted);
+}
+
+.info-value {
+  font-size: 0.95rem;
+  font-weight: 500;
+}
+
+.back-link {
+  margin-top: 16px;
+}
+.back-link a {
+  color: var(--color-muted);
+  font-size: 0.9rem;
+}
+.back-link a:hover {
+  color: var(--color-primary);
+}
+
+/* ── ABOUT PAGE ──────────────────────────────────────────────── */
+.about-content {
+  max-width: 720px;
+}
+
+.about-content h2 {
+  font-size: 1.25rem;
+  margin: 28px 0 10px;
+  color: var(--color-primary);
+}
+
+.about-content p,
+.about-content ul {
+  margin-bottom: 14px;
+  line-height: 1.75;
+}
+
+.about-content ul {
+  padding-left: 20px;
+}
+
+.about-content li {
+  margin-bottom: 6px;
+}
+
+/* Definition list for ramen types */
+.ramen-glossary {
+  border-left: 3px solid var(--color-primary);
+  padding-left: 16px;
+  margin: 16px 0;
+}
+
+.ramen-glossary dt {
+  font-weight: 700;
+  margin-top: 12px;
+}
+
+.ramen-glossary dd {
+  color: var(--color-muted);
+  font-size: 0.95rem;
+}
+
+/* ── TIPS SECTION ────────────────────────────────────────────── */
+.tips-section {
+  background: var(--color-surface);
+  border-radius: var(--radius);
+  padding: 24px;
+  border: 1px solid var(--color-border);
+}
+
+.tips-list {
+  list-style: none;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.tips-list li {
+  font-size: 0.95rem;
+  line-height: 1.6;
+}
+
+/* ── EMPTY STATE ─────────────────────────────────────────────── */
+.empty-message {
+  text-align: center;
+  color: var(--color-muted);
+  padding: 40px 20px;
+}
+
+/* ── FOOTER ──────────────────────────────────────────────────── */
+.site-footer {
+  background-color: #2c2c2c;
+  color: rgba(255,255,255,0.75);
+  padding: 28px 0;
+  margin-top: 48px;
+  font-size: 0.9rem;
+}
+
+.site-footer p {
+  margin-bottom: 10px;
+  text-align: center;
+}
+
+.footer-nav {
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+  flex-wrap: wrap;
+}
+
+.footer-nav a {
+  color: rgba(255,255,255,0.7);
+}
+.footer-nav a:hover {
+  color: white;
+}
+
+/* ============================================================
+   RESPONSIVE BREAKPOINTS
+   min-width: 600px  → tablet
+   min-width: 900px  → desktop
+   ============================================================ */
+
+@media (min-width: 600px) {
+
+  .hero h1 {
+    font-size: 2.2rem;
+  }
+
+  /* 2 columns for city cards and restaurant grid on tablets */
+  .city-cards,
+  .restaurant-grid {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  /* Info grid becomes a row on tablets */
+  .info-grid {
+    grid-template-columns: 1fr 1fr 1fr;
+  }
+}
+
+@media (min-width: 900px) {
+
+  /* 3 or 4 columns on large screens */
+  .restaurant-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+
+  main {
+    padding: 32px 16px;
+  }
+
+  .hero h1 {
+    font-size: 2.6rem;
+  }
+
+  .hero-subtitle {
+    font-size: 1.1rem;
+  }
+}

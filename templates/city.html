@@ -1,0 +1,61 @@
+<!--
+  city.html — City ramen list page (used for both Tokyo and Osaka).
+  app.py passes two variables: city (e.g. "Tokyo") and restaurants (a list of dicts).
+-->
+{% extends "base.html" %}
+
+{% block title %}{{ city }} Ramen{% endblock %}
+
+{% block content %}
+
+  <!-- ── PAGE HEADER ──────────────────────────────────────────────── -->
+  <section class="page-header">
+    {% if city == "Tokyo" %}
+      <h1>🗼 Ramen in Tokyo</h1>
+    {% else %}
+      <h1>🏯 Ramen in Osaka</h1>
+    {% endif %}
+    <p>{{ restaurants | length }} restaurants found</p>
+  </section>
+
+  <!-- ── AD PLACEHOLDER (sidebar-style on desktop) ─────────────────── -->
+  <div class="ad-inline">
+    <span>Advertisement</span>
+  </div>
+
+  <!-- ── RESTAURANT GRID ───────────────────────────────────────────── -->
+  <!--
+    If the restaurants list is empty, show a message.
+    Otherwise, show the grid of cards.
+  -->
+  {% if restaurants %}
+    <div class="restaurant-grid">
+      {% for r in restaurants %}
+        <a href="{{ url_for('detail', restaurant_id=r.id) }}" class="restaurant-card">
+
+          <div class="card-header">
+            <span class="ramen-type-badge">{{ r.ramen_type }}</span>
+          </div>
+
+          <h3 class="card-name">{{ r.name }}</h3>
+          <p class="card-area">📍 {{ r.area }}</p>
+          <p class="card-desc">{{ r.description[:130] }}…</p>
+          <p class="card-price">{{ r.price_range }}</p>
+
+          <div class="tag-list">
+            {% for tag in r.tags %}
+              <span class="tag">{{ tag }}</span>
+            {% endfor %}
+          </div>
+
+          <span class="card-link">View details →</span>
+
+        </a>
+      {% endfor %}
+    </div>
+
+  {% else %}
+    <p class="empty-message">No restaurants listed for {{ city }} yet. Check back soon!</p>
+  {% endif %}
+
+{% endblock %}
