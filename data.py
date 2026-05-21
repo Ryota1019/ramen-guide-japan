@@ -97,7 +97,26 @@ RESTAURANTS = [
         "address": "2-4 Dotonbori, Chuo-ku, Osaka",
         "google_maps_url": "https://www.google.com/maps/search/Kinryu+Ramen+Dotonbori+Osaka",
         "tags": ["tonkotsu", "shoyu", "late-night", "tourist-friendly", "budget", "iconic"],
-    },
+    }
+    ,
+    {
+        "id": "satsumaya-hotarugaike",
+        "name": "Satsumaya Ramen",
+        "city": "osaka",
+        "area": "Hotarugaike",
+        "ramen_type": "Shoyu (Soy Sauce)",
+        "description": (
+            "Thick, chewy homemade noodles served in a strong soy-sauce pork broth that pairs "
+            "perfectly with rice. Free extra noodles and unlimited rice make it great value. "
+            "The popular MAX Ramen is topped with extra pork, egg, and vegetables — a must-try."
+        ),
+        "price_range": "¥1,000 – ¥2,000",
+        "hours": "11:00 – 14:30, 17:30 – 01:00",
+        "address": "Hotarugaike, Toyonaka, Osaka",
+        "google_maps_url": "https://maps.app.goo.gl/YXsBvEfAdo2KwdQF9",
+        "tags": ["shoyu", "local-favorite", "great-value", "late-night"],
+    }
+    ,
     {
         "id": "kamukura-shinsaibashi",
         "name": "Kamukura",
